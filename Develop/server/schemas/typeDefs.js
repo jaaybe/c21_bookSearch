@@ -21,14 +21,7 @@ type Book {
     savedBooks: [Book]
   }
 
-  type Input {
-    authors: [String]!
-    description: String!
-    title: String!
-    bookId: String!
-    image: String!
-    link: String!
-  }
+ 
 
   type Query {
     me: User
@@ -37,8 +30,17 @@ type Book {
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-  
+    saveBook(input: Input): User
     removeBook(bookId: String!): User
+  }
+
+   input Input {
+    authors: [String]!
+    description: String!
+    title: String!
+    bookId: String!
+    image: String
+    link: String
   }
   
   type Auth {
@@ -53,4 +55,3 @@ type Book {
 module.exports = typeDefs;
 
 
-// saveBook(input: Input): User

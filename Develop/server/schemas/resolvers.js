@@ -68,19 +68,20 @@ const resolvers = {
             return { token, user };
           },
 
-        //   saveBook: async (parent, args, context) => {
-        //     console.log(context.user);
-        //     try {
-        //       const updatedUser = await User.findOneAndUpdate(
-        //         { _id: context.user._id },
-        //         { $addToSet: { savedBooks: args } },
-        //         { new: true, runValidators: true }
-        //       );
-        //       return updatedUser
-        //     } catch (err) {
-        //       console.log(err);
-        //     }
-        // },
+          saveBook: async (parent, args, context) => {
+            console.log("SAVE+BOOK")
+            console.log(context.user);
+            try {
+              const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { savedBooks: args } },
+                { new: true, runValidators: true }
+              );
+              return updatedUser
+            } catch (err) {
+              console.log(err);
+            }
+        },
 
         removeBook: async (parent, args, context) => {
             const updatedUser = await User.findOneAndUpdate(
