@@ -25,7 +25,7 @@ server.applyMiddleware({ app });
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(routes);
+
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
@@ -37,4 +37,8 @@ db.once('open', () => {
     // log where we can go to test our GQL API
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   });
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
